@@ -1,20 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
 import { ValueReducer } from "./ValueSlice";
-import storage from "redux-persist/lib/storage";
-const persistConfig = {
-    key: 'root',
-    storage,
-};
-const rootRedusers = persistReducer(
-    persistConfig,
-    ValueReducer,
-)
+import { FilterReduser } from "./FilterSlice";
 
-export const Store = configureStore({
+
+
+export const store = configureStore({
     reducer: {
-        phonebook: rootRedusers,
-    }
-})
+        contacts: ValueReducer,
+        filter: FilterReduser,
+    },
+});
 
-export const persistor = persistStore(Store);
+

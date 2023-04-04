@@ -15,7 +15,7 @@ export const ContactForm = () => {
         initialValues={initialValues}
         onSubmit={(values, { resetForm }) => {
             dispatch(addContact({
-                ...values
+                ...values,
             }))
             resetForm();
         }}
@@ -43,5 +43,5 @@ export const ContactForm = () => {
     </Formik>
 }
 ContactForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func,
 }
