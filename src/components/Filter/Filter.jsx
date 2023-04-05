@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { FilterField } from './Filter.styled';
 import { filter } from 'Redux/FilterSlice';
-import { getFilter } from 'Redux/Selectors';
+import { selectFilter } from 'Redux/Selectors';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const Filter = () => {
     const dispatch = useDispatch();
-    const value = useSelector(getFilter);
+    const value = useSelector(selectFilter);
 
     return <FilterField>Find contact by Name
         <input type="text" value={value}

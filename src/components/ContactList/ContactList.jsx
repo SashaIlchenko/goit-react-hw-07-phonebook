@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import { DeleteBtn } from './ContactList.styled';
 import { deleteContact } from 'Redux/Operations';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilteredContacts } from 'Redux/Selectors';
+import { selectFilteredContacts } from 'Redux/Selectors';
 export const ContactList = () => {
     const dispatch = useDispatch();
-    const contacts = useSelector(getFilteredContacts);
+    const contacts = useSelector(selectFilteredContacts);
     return < ul >
         {contacts.map(contact => (<li key={contact.id}>{contact.name}: {contact.number}<DeleteBtn type='button' onClick={() => dispatch(deleteContact(contact.id))}>Delate</DeleteBtn ></li>))}
     </ul >
