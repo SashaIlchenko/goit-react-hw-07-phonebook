@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { Formik, Field } from 'formik';
 import { Form, FormField, AddBtn } from './ContactForm.styled';
 import { addContact } from 'Redux/Operations';
-
+import { useSelector } from 'react-redux';
+import { selectContacts } from 'Redux/Selectors';
 const initialValues = {
     name: '',
     number: '',
@@ -11,14 +12,21 @@ const initialValues = {
 
 export const ContactForm = () => {
     const dispatch = useDispatch();
+    const contacts = useSelector(selectContacts);
+    const handleSubmit = (values, { resetForm }) => {
+        const newContact = contacts.find(contact => contact.name.toLowerCase() === values.name.toLowerCase())
+        if (newContact) {
+            return alert(`${values.name} is already in contacts`);
+        }
+        dispatch(addContact({
+            ...values,
+        }))
+        resetForm();
+    }
+
     return <Formik
         initialValues={initialValues}
-        onSubmit={(values, { resetForm }) => {
-            dispatch(addContact({
-                ...values,
-            }))
-            resetForm();
-        }}
+        onSubmit={handleSubmit}
     >
         <Form>
             < FormField>Name

@@ -26,16 +26,11 @@ export const valueSlice = createSlice({
             .addCase(fetchContacts.rejected, handleRejected)
             .addCase(addContact.pending, handlePending)
             .addCase(addContact.fulfilled, (state, action) => {
-                const variable = state.contacts.find(
-                    contact => contact.name.toLowerCase() === action.payload.name.toLowerCase(),
-                );
-                if (variable) {
-                    alert(`${action.payload.name} is already in contacts`);
-                    return state;
-                }
+
                 state.isLoading = false;
                 state.error = null;
                 state.contacts.push(action.payload);
+
             })
             .addCase(addContact.rejected, handleRejected)
             .addCase(deleteContact.pending, handlePending)
