@@ -16,6 +16,7 @@ export const ContactForm = () => {
     const handleSubmit = (values, { resetForm }) => {
         const newContact = contacts.find(contact => contact.name.toLowerCase() === values.name.toLowerCase())
         if (newContact) {
+            resetForm();
             return alert(`${values.name} is already in contacts`);
         }
         dispatch(addContact({
